@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import NavBar from './Components/NavBar/NavBar';
 
 
 function App() {
 
-  const [demoVar, setDemoVar] = useState("")
 
   return (
-    <div>
-      <h1>THK</h1>
+    <div className='appContainer'>
+      <div>
+      <NavBar />
+      </div>
     </div>
   );
 }
