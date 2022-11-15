@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDeferredValue } from "react";
 
 //Regular expressions for defining username and pwd patterns
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
@@ -57,10 +58,43 @@ const Register = () => {
         setValidMatch(match);
     }, [pwd, matchPwd]);
 
-    return (
-        <div>
+    useEffect(() => {
+        setErrMsg('');
+    }, [user, pwd, matchPwd])
 
-        </div>
+    return (
+        <section>
+            <p ref={errRef} className={errMsg ? "errmsg" :
+            "offscreen"} aria-live="assrtive">{errMsg}</p>
+            <h1>Register</h1>
+            <form>
+                <label htmlFor="username">
+                    Username:
+                </label>
+                <input
+                    type="text"
+                    id="username"
+                    ref={userRef}
+                    autoComplete="off"
+                    //this function will provide the event and then set the user state, ties input to user state
+                    onChange={(e) => setUser(e.target.value)}
+                    required
+                    aria-invalid={validName ? "false" : "true"}
+                    //Let's us provide another element that describes the input field, screen reader will read label first and what type of input we're addressing, and if the input is valid.
+                    aria-describedby="uidnote"
+                    onFocus={() => setUserFocus(true)}
+                    onBlur={() => setUserFocus(false)}
+                />
+                <p is="uidnote" className={userFocus && user &&
+                !validName ? "instructions" : "offscreen"}>
+                    <FontAwesomeIcon icon={faInfoCircle} />
+                    4 to 24 characters.<br />
+                    Must begin with a letter.<br />
+                    Letters, numbers, underscores, hyphens allowed. 
+
+                </p>
+            </form>
+        </section>
     )
 
 
