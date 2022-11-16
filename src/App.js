@@ -8,7 +8,7 @@ function App() {
   return (
     <div className='appContainer'>
       <div>
-      <NavBar />
+              <NavBar Hide={ false} />
       </div>
     </div>
   );
