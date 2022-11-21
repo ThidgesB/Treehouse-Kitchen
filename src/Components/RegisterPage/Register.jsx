@@ -62,12 +62,25 @@ const Register = () => {
         setErrMsg('');
     }, [user, pwd, matchPwd])
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        // if button enabled with JS hack
+        const v1 = USER_REGEX.test(user);
+        const v2 = PWD_REGEX.test(pwd);
+        if (!v1 || !v2) {
+            setErrMsg("Invalid Entry");
+            return;
+        }
+        console.log(user, pwd);
+        setSuccess(true);
+    }
+
     return (
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" :
             "offscreen"} aria-live="assertive">{errMsg}</p>
             <h1>Register</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="username">
                     Username:
                     <span className={validName ? "valid" : "hide"}>
@@ -153,6 +166,12 @@ const Register = () => {
                     Sign Up!
                 </button>
             </form>
+            <p>
+                Already Registered?<br />
+                <span className="line">
+                    <a href="#">Sign In</a>
+                </span>
+            </p>
         </section>
     )
 
