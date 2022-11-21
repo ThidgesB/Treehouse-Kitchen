@@ -14,7 +14,7 @@ const NavBar = (props) => {
     )
 
 }
-const NavContent = ["test", "test1", "test2"]
+const NavContent = ["blue", "red", "yellow"]
 const NavItemContiner = (props) => {
 
     return (
