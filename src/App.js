@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
-import NavBar from './Components/NavBar/NavBar';
-import Register from './Components/RegisterPage/Register';
+import "@aws-amplify/ui-react/styles.css";
+import {
+  withAuthenticator,
+  Button,
+  Heading,
+  Image,
+  View,
+  Card,
+} from "@aws-amplify/ui-react";
 
-
-function App() {
-
-
+function App({ signOut }) {
   return (
-    <div className='appContainer'>
-      <div>
-      <NavBar />
-      <Register />
-      </div>
-    </div>
+    <View className="App">
+      <Card>
+        <Image className="App-logo" alt="logo" />
+        <Heading level={1}>We now have Auth!</Heading>
+      </Card>
+      <Button onClick={signOut}>Sign Out</Button>
+    </View>
   );
 }
 
-export default App;
+export default withAuthenticator(App);
